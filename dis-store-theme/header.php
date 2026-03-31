@@ -10,41 +10,58 @@
 <?php wp_body_open(); ?>
 
 <?php
-  $logo = get_field('header_logo', 'option'); 
+  $logo = get_field('header_logo', 'option');
 ?>
 
 <header class="site-header">
-  <div class="container header-inner">
+  <div class="header-shell">
 
-    <a class="logo" href="<?php echo esc_url(home_url('/')); ?>">
-      <?php if (!empty($logo) && !empty($logo['url'])): ?>
-        <img
-          src="<?php echo esc_url($logo['url']); ?>"
-          alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-          style="height:34px; width:auto; display:block;"
-        >
-      <?php else: ?>
-        DIS<span>STORE</span>
-      <?php endif; ?>
-    </a>
+    <div class="header-logo-outside">
+      <a class="logo" href="<?php echo esc_url(home_url('/')); ?>">
+        <?php if (!empty($logo) && !empty($logo['url'])): ?>
+          <img
+            src="<?php echo esc_url($logo['url']); ?>"
+            alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
+          >
+        <?php else: ?>
+          DIS<span>STORE</span>
+        <?php endif; ?>
+      </a>
+    </div>
 
-    <nav class="main-nav desktop-nav" aria-label="Головне меню">
-      <?php
-        wp_nav_menu([
-          'theme_location' => 'header_menu',
-          'container' => false,
-          'menu_class' => 'menu',
-          'fallback_cb' => false,
-        ]);
-      ?>
-    </nav>
+    <div class="header-center">
+      <nav class="main-nav desktop-nav" aria-label="Головне меню">
+        <?php
+          wp_nav_menu([
+            'theme_location' => 'header_menu',
+            'container'      => false,
+            'menu_class'     => 'menu',
+            'fallback_cb'    => false,
+          ]);
+        ?>
+      </nav>
 
-    <div class="header-right">
       <form class="header-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-        <input class="search-input" type="search" name="s" placeholder="Пошук..." value="<?php echo get_search_query(); ?>">
+        <input
+          class="search-input"
+          type="search"
+          name="s"
+          placeholder="Пошук..."
+          value="<?php echo esc_attr(get_search_query()); ?>"
+        >
       </form>
+    </div>
 
-      <button class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false">
+    <div class="header-actions-outside">
+      <a class="header-action-link" href="<?php echo esc_url(function_exists('wc_get_page_permalink') ? wc_get_page_permalink('myaccount') : home_url('/my-account/')); ?>">
+        Увійти
+      </a>
+
+      <a class="header-action-link" href="<?php echo esc_url(function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/')); ?>">
+        Кошик
+      </a>
+
+      <button class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -53,20 +70,38 @@
 
   <div class="mobile-menu" id="mobileMenu" hidden>
     <div class="container mobile-menu-inner">
+
       <form class="header-search mobile-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-        <input class="search-input" type="search" name="s" placeholder="Пошук..." value="<?php echo get_search_query(); ?>">
+        <input
+          class="search-input"
+          type="search"
+          name="s"
+          placeholder="Пошук..."
+          value="<?php echo esc_attr(get_search_query()); ?>"
+        >
       </form>
+
+      <div class="mobile-header-actions">
+        <a class="header-action-link" href="<?php echo esc_url(function_exists('wc_get_page_permalink') ? wc_get_page_permalink('myaccount') : home_url('/my-account/')); ?>">
+          Увійти
+        </a>
+
+        <a class="header-action-link" href="<?php echo esc_url(function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/')); ?>">
+          Кошик
+        </a>
+      </div>
 
       <nav class="main-nav mobile-nav" aria-label="Мобільне меню">
         <?php
           wp_nav_menu([
             'theme_location' => 'header_menu',
-            'container' => false,
-            'menu_class' => 'menu mobile-menu-list',
-            'fallback_cb' => false,
+            'container'      => false,
+            'menu_class'     => 'menu mobile-menu-list',
+            'fallback_cb'    => false,
           ]);
         ?>
       </nav>
+
     </div>
   </div>
 </header>
