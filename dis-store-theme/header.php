@@ -40,16 +40,6 @@
           ]);
         ?>
       </nav>
-
-      <form class="header-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-        <input
-          class="search-input"
-          type="search"
-          name="s"
-          placeholder="Пошук..."
-          value="<?php echo esc_attr(get_search_query()); ?>"
-        >
-      </form>
     </div>
 
     <div class="header-actions-outside">
@@ -64,6 +54,18 @@
       <button class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
+    </div>
+
+    <div class="header-search-rail">
+      <form class="header-search desktop-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+        <input
+          class="search-input"
+          type="search"
+          name="s"
+          placeholder="Пошук..."
+          value="<?php echo esc_attr(get_search_query()); ?>"
+        >
+      </form>
     </div>
 
   </div>
