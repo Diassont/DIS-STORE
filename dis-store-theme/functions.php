@@ -93,3 +93,11 @@ add_action('acf/init', function () {
     ]);
   }
 });
+
+wp_enqueue_script(
+  'lucide',
+  'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js',
+  [],
+  null,
+  true
+);

@@ -70,8 +70,13 @@
   </div>
 
   <div class="container footer-bottom">
-    <span class="muted">© <?php echo date('Y'); ?> <?php echo esc_html($footer_copy); ?></span>
-  </div>
+  <p class="muted">
+    © <?php echo date('Y'); ?> <?php echo esc_html($footer_copy); ?>. 
+    <?php if (!empty(get_field('footer_author', 'option'))): ?>
+      Розробка сайту — <strong><?php the_field('footer_author', 'option'); ?></strong>.
+    <?php endif; ?>
+  </p>
+</div>
 </footer>
 
 <div class="modal" id="productModal" aria-hidden="true">
