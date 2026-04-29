@@ -280,3 +280,86 @@
 })();
 
 lucide.createIcons();
+
+(function() {
+  const search   = document.getElementById('filterSearch');
+  const priceMin = document.getElementById('filterPriceMin');
+  const priceMax = document.getElementById('filterPriceMax');
+  const sort     = document.getElementById('filterSort');
+  const reset    = document.getElementById('filterReset');
+  const grid     = document.querySelector('.product-grid');
+
+  if (!grid) return;
+
+  function getCards() {
+    return Array.from(grid.querySelectorAll('.p-card'));
+  }
+
+  function getRawPrice(card) {
+    const el = card.querySelector('.woocommerce-Price-amount');
+    if (!el) return 0;
+    return parseFloat(el.textContent.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+  }
+
+  function applyFilter() {
+    const q       = search ? search.value.toLowerCase().trim() : '';
+    const min     = priceMin ? parseFloat(priceMin.value) || 0 : 0;
+    const max     = priceMax ? parseFloat(priceMax.value) || Infinity : Infinity;
+    const sortVal = sort ? sort.value : '';
+
+    let cards = getCards();
+
+    // Показати/сховати по пошуку і ціні
+    cards.forEach(card => {
+      const title = card.querySelector('.p-title')?.textContent.toLowerCase() || '';
+      const price = getRawPrice(card);
+      const matchQ = !q || title.includes(q);
+      const matchP = price >= min && price <= max;
+      card.style.display = matchQ && matchP ? '' : 'none';
+    });
+
+    // Сортування
+    const visible = cards.filter(c => c.style.display !== 'none');
+
+    visible.sort((a, b) => {
+      const pa = getRawPrice(a);
+      const pb = getRawPrice(b);
+      const na = a.querySelector('.p-title')?.textContent.trim() || '';
+      const nb = b.querySelector('.p-title')?.textContent.trim() || '';
+
+      if (sortVal === 'price_asc')  return pa - pb;
+      if (sortVal === 'price_desc') return pb - pa;
+      if (sortVal === 'name_asc')   return na.localeCompare(nb, 'uk');
+      if (sortVal === 'name_desc')  return nb.localeCompare(na, 'uk');
+      return 0;
+    });
+
+    visible.forEach(card => grid.appendChild(card));
+
+    // Показати повідомлення якщо нічого не знайдено
+    let empty = grid.querySelector('.filter-empty');
+    if (!empty) {
+      empty = document.createElement('p');
+      empty.className = 'filter-empty';
+      empty.textContent = 'Нічого не знайдено. Спробуйте змінити фільтри.';
+      grid.appendChild(empty);
+    }
+    empty.style.display = visible.length === 0 ? 'block' : 'none';
+  }
+
+  // Скинути фільтри
+  if (reset) {
+    reset.addEventListener('click', () => {
+      if (search)   search.value   = '';
+      if (priceMin) priceMin.value = '';
+      if (priceMax) priceMax.value = '';
+      if (sort)     sort.value     = '';
+      applyFilter();
+    });
+  }
+
+  if (search)   search.addEventListener('input', applyFilter);
+  if (priceMin) priceMin.addEventListener('input', applyFilter);
+  if (priceMax) priceMax.addEventListener('input', applyFilter);
+  if (sort)     sort.addEventListener('change', applyFilter);
+})();
