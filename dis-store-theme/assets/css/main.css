@@ -49,18 +49,10 @@ body{
   flex-direction:column;
 }
 
-body.menu-open{
-  overflow:hidden;
-}
+body.menu-open{ overflow:hidden; }
+body.modal-open{ overflow:hidden; }
 
-body.modal-open{
-  overflow:hidden;
-}
-
-img,
-video,
-iframe,
-svg{
+img,video,iframe,svg{
   max-width:100%;
   height:auto;
   display:block;
@@ -118,14 +110,8 @@ svg{
   white-space:nowrap;
 }
 
-.logo img{
-  height:34px;
-  width:auto;
-}
-
-.logo span{
-  color:var(--orange);
-}
+.logo img{ height:34px; width:auto; }
+.logo span{ color:var(--orange); }
 
 .header-center{
   display:flex;
@@ -143,9 +129,7 @@ svg{
   min-width:0;
 }
 
-.main-nav{
-  min-width:0;
-}
+.main-nav{ min-width:0; }
 
 .main-nav .menu{
   display:flex;
@@ -159,10 +143,7 @@ svg{
   max-width:100%;
 }
 
-.main-nav .menu > li{
-  margin:0;
-  padding:0;
-}
+.main-nav .menu > li{ margin:0; padding:0; }
 
 .main-nav .menu > li > a{
   color:var(--text);
@@ -176,7 +157,6 @@ svg{
   line-height:1.1;
   white-space:nowrap;
   text-align:center;
-  max-width:none;
   font-size:15px;
   transition:background .2s ease, opacity .2s ease, transform .15s ease;
 }
@@ -218,7 +198,6 @@ svg{
   transform:translateY(-1px);
 }
 
-/* Header action іконки */
 .header-action-text{
   font-weight:700;
   font-size:15px;
@@ -242,13 +221,9 @@ svg{
   transition:stroke .2s ease;
 }
 
-.header-action-icon:hover svg{
-  stroke:var(--orange);
-}
+.header-action-icon:hover svg{ stroke:var(--orange); }
 
-.cart-icon-wrap{
-  position:relative;
-}
+.cart-icon-wrap{ position:relative; }
 
 .cart-count{
   position:absolute;
@@ -270,9 +245,7 @@ svg{
 }
 
 /* Tooltip */
-.has-tooltip{
-  position:relative;
-}
+.has-tooltip{ position:relative; }
 
 .has-tooltip::after{
   content:attr(data-tooltip);
@@ -294,35 +267,19 @@ svg{
   z-index:9999;
 }
 
-.has-tooltip:hover::after{
-  opacity:1;
-}
+.has-tooltip:hover::after{ opacity:1; }
 
 .header-search-rail{
   position:absolute;
   top:50%;
   left:50%;
   width:min(var(--containerW),92vw);
-  transform:translate(-50%, -50%);
+  transform:translate(-50%,-50%);
   display:flex;
   justify-content:flex-end;
   align-items:center;
   pointer-events:none;
   z-index:4;
-}
-
-@media (max-width:980px){
-  .header-search-rail{
-    display:none !important;
-  }
-
-  .desktop-search{
-    display:none !important;
-  }
-
-  .header-center{
-    justify-content:flex-start;
-  }
 }
 
 .desktop-search{
@@ -343,9 +300,7 @@ svg{
   transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
-.search-input::placeholder{
-  color:rgba(243,244,246,.48);
-}
+.search-input::placeholder{ color:rgba(243,244,246,.48); }
 
 .search-input:focus{
   border-color:rgba(255,106,0,.35);
@@ -353,7 +308,6 @@ svg{
   background:rgba(255,255,255,.08);
 }
 
-/* burger */
 .burger{
   display:none;
   width:44px;
@@ -373,35 +327,29 @@ svg{
   border-radius:999px;
 }
 
-/* admin bar */
-body.admin-bar{
-  --adminBarOffset:32px;
-}
+/* Admin bar */
+body.admin-bar{ --adminBarOffset:32px; }
 
 @media (max-width:782px){
-  body.admin-bar{
-    --adminBarOffset:46px;
-  }
+  body.admin-bar{ --adminBarOffset:46px; }
 }
 
-body.admin-bar .site-header{
-  top:var(--adminBarOffset);
-}
-
-body.admin-bar .mobile-menu{
-  top:calc(var(--headerH) + var(--adminBarOffset));
-}
+body.admin-bar .site-header{ top:var(--adminBarOffset); }
+body.admin-bar .mobile-menu{ top:calc(var(--headerH) + var(--adminBarOffset)); }
 
 @media (max-width:782px){
-  body.admin-bar #wpadminbar{
-    position:fixed !important;
-  }
-
+  body.admin-bar #wpadminbar{ position:fixed !important; }
   html.admin-bar,
   body.admin-bar{
     margin-top:0 !important;
     padding-top:0 !important;
   }
+}
+
+@media (max-width:980px){
+  .header-search-rail{ display:none !important; }
+  .desktop-search{ display:none !important; }
+  .header-center{ justify-content:flex-start; }
 }
 
 /* -------------------------
@@ -419,9 +367,7 @@ body.admin-bar .mobile-menu{
   padding:10px 0 16px;
 }
 
-.mobile-menu[hidden]{
-  display:none !important;
-}
+.mobile-menu[hidden]{ display:none !important; }
 
 .mobile-menu-inner{
   display:grid;
@@ -429,13 +375,9 @@ body.admin-bar .mobile-menu{
   justify-items:center;
 }
 
-.mobile-header-actions{
-  display:none;
-}
+.mobile-header-actions{ display:none; }
 
-.mobile-search{
-  width:100%;
-}
+.mobile-search{ width:100%; }
 
 .mobile-search .search-input{
   width:100%;
@@ -480,31 +422,15 @@ body.admin-bar .mobile-menu{
   border-color:rgba(255,106,0,.35);
 }
 
-@media (min-width:981px){
-  .mobile-menu{
-    display:none !important;
-  }
-}
-
-@media (max-width:768px){
-  .logo img{
-    height:28px;
-  }
-}
-
-@media (max-width:480px){
-  .logo img{
-    height:24px;
-  }
-}
+@media (min-width:981px){ .mobile-menu{ display:none !important; } }
+@media (max-width:768px){ .logo img{ height:28px; } }
+@media (max-width:480px){ .logo img{ height:24px; } }
 
 /* -------------------------
    4) Responsive Header
    ------------------------- */
 @media (max-width:980px){
-  .desktop-nav{
-    display:none !important;
-  }
+  .desktop-nav{ display:none !important; }
 
   .header-actions-outside .header-action-link:not(.header-action-icon){
     display:none;
@@ -523,10 +449,7 @@ body.admin-bar .mobile-menu{
     flex-wrap:wrap;
   }
 
-  .header-shell{
-    gap:12px;
-    padding:0 16px;
-  }
+  .header-shell{ gap:12px; padding:0 16px; }
 }
 
 /* -------------------------
@@ -539,18 +462,14 @@ body.admin-bar .mobile-menu{
   overflow:visible;
 }
 
-.section{
-  padding:42px 0;
-}
+.section{ padding:42px 0; }
 
 .page-title{
   font-size:34px;
   margin:0 0 18px;
 }
 
-.muted{
-  color:var(--muted);
-}
+.muted{ color:var(--muted); }
 
 /* -------------------------
    6) Generic Grid / Cards
@@ -561,17 +480,8 @@ body.admin-bar .mobile-menu{
   gap:14px;
 }
 
-@media (max-width:980px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media (max-width:520px){
-  .grid{
-    grid-template-columns:1fr;
-  }
-}
+@media (max-width:980px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .grid{ grid-template-columns:1fr; } }
 
 .card{
   background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
@@ -588,9 +498,7 @@ body.admin-bar .mobile-menu{
   box-shadow:0 18px 50px rgba(0,0,0,.35);
 }
 
-.content{
-  line-height:1.7;
-}
+.content{ line-height:1.7; }
 
 /* -------------------------
    7) Footer
@@ -616,19 +524,9 @@ body.admin-bar .mobile-menu{
   margin-bottom:8px;
 }
 
-.footer-logo img{
-  height:32px;
-  width:auto;
-}
-
-.footer-logo span{
-  color:var(--orange);
-}
-
-.footer-title{
-  font-weight:800;
-  margin-bottom:10px;
-}
+.footer-logo img{ height:32px; width:auto; }
+.footer-logo span{ color:var(--orange); }
+.footer-title{ font-weight:800; margin-bottom:10px; }
 
 .footer-menu{
   list-style:none;
@@ -644,20 +542,10 @@ body.admin-bar .mobile-menu{
   opacity:.85;
 }
 
-.footer-menu a:hover{
-  opacity:1;
-  color:var(--orange);
-}
+.footer-menu a:hover{ opacity:1; color:var(--orange); }
 
-.site-footer a{
-  color:var(--text);
-  text-decoration:none;
-}
-
-.site-footer a:hover{
-  color:var(--orange);
-  text-decoration:underline;
-}
+.site-footer a{ color:var(--text); text-decoration:none; }
+.site-footer a:hover{ color:var(--orange); text-decoration:underline; }
 
 .footer-bottom{
   margin-top:14px;
@@ -665,20 +553,11 @@ body.admin-bar .mobile-menu{
   border-top:1px solid var(--border);
 }
 
-@media (max-width:900px){
-  .footer-inner{
-    grid-template-columns:1fr 1fr;
-  }
-}
+@media (max-width:900px){ .footer-inner{ grid-template-columns:1fr 1fr; } }
 
 @media (max-width:600px){
-  .footer-inner{
-    grid-template-columns:1fr;
-  }
-
-  .footer-logo img{
-    height:28px;
-  }
+  .footer-inner{ grid-template-columns:1fr; }
+  .footer-logo img{ height:28px; }
 }
 
 /* -------------------------
@@ -708,31 +587,10 @@ body.admin-bar .mobile-menu{
   width:max-content;
 }
 
-.hero-title{
-  font-size:44px;
-  margin:14px 0 10px;
-  line-height:1.12;
-}
-
-.hero-sub{
-  max-width:62ch;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-
-.hero-stats{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-top:18px;
-}
+.hero-title{ font-size:44px; margin:14px 0 10px; line-height:1.12; }
+.hero-sub{ max-width:62ch; color:var(--muted); line-height:1.6; }
+.hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+.hero-stats{ display:flex; gap:14px; flex-wrap:wrap; margin-top:18px; }
 
 .stat{
   padding:12px 14px;
@@ -742,10 +600,7 @@ body.admin-bar .mobile-menu{
   min-width:140px;
 }
 
-.stat-num{
-  font-weight:900;
-  font-size:18px;
-}
+.stat-num{ font-weight:900; font-size:18px; }
 
 .hero-card{
   border-radius:18px;
@@ -754,28 +609,10 @@ body.admin-bar .mobile-menu{
   padding:16px;
 }
 
-.hero-card-title{
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.hero-product .hp-name{
-  font-weight:900;
-  font-size:18px;
-}
-
-.hp-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
-.hero-strip{
-  margin-top:12px;
-  display:grid;
-  gap:10px;
-}
+.hero-card-title{ font-weight:900; margin-bottom:10px; }
+.hero-product .hp-name{ font-weight:900; font-size:18px; }
+.hp-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.hero-strip{ margin-top:12px; display:grid; gap:10px; }
 
 .strip-item{
   padding:12px 14px;
@@ -793,51 +630,22 @@ body.admin-bar .mobile-menu{
 }
 
 @media (max-width:980px){
-  .hero-inner{
-    grid-template-columns:1fr;
-  }
-
-  .hero-title{
-    font-size:36px;
-  }
-
-  .section-head{
-    margin-bottom:16px;
-  }
+  .hero-inner{ grid-template-columns:1fr; }
+  .hero-title{ font-size:36px; }
+  .section-head{ margin-bottom:16px; }
 }
 
 @media (max-width:600px){
-  .section-head{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
-  }
-
+  .section-head{ flex-direction:column; align-items:flex-start; gap:10px; }
   .section-head .btn,
-  .section-head .head-link{
-    width:fit-content;
-    max-width:100%;
-  }
+  .section-head .head-link{ width:fit-content; max-width:100%; }
 }
 
 @media (max-width:520px){
-  .hero{
-    padding:24px 0 18px;
-  }
-
-  .hero-title{
-    font-size:30px;
-    line-height:1.15;
-  }
-
-  .stat{
-    min-width:0;
-    flex:1;
-  }
-
-  .section-head{
-    margin-bottom:14px;
-  }
+  .hero{ padding:24px 0 18px; }
+  .hero-title{ font-size:30px; line-height:1.15; }
+  .stat{ min-width:0; flex:1; }
+  .section-head{ margin-bottom:14px; }
 }
 
 /* -------------------------
@@ -866,13 +674,8 @@ body.admin-bar .mobile-menu{
   opacity:1;
 }
 
-.btn:visited{
-  color:var(--text);
-}
-
-.btn:focus{
-  outline:none;
-}
+.btn:visited{ color:var(--text); }
+.btn:focus{ outline:none; }
 
 .btn-outline{
   background:rgba(255,255,255,.06);
@@ -900,9 +703,7 @@ body.admin-bar .mobile-menu{
   transition:transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
 }
 
-.head-link:visited{
-  color:var(--orange2);
-}
+.head-link:visited{ color:var(--orange2); }
 
 .head-link:hover{
   background:rgba(255,106,0,.18);
@@ -911,15 +712,8 @@ body.admin-bar .mobile-menu{
   transform:translateY(-1px);
 }
 
-.head-link .arr{
-  display:inline-block;
-  transition:transform .15s ease;
-  opacity:.95;
-}
-
-.head-link:hover .arr{
-  transform:translateX(3px);
-}
+.head-link .arr{ display:inline-block; transition:transform .15s ease; opacity:.95; }
+.head-link:hover .arr{ transform:translateX(3px); }
 
 /* -------------------------
    10) Product Grid + Cards
@@ -928,19 +722,11 @@ body.admin-bar .mobile-menu{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:14px;
+  align-items:stretch;
 }
 
-@media (max-width:980px){
-  .product-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media (max-width:600px){
-  .product-grid{
-    grid-template-columns:1fr;
-  }
-}
+@media (max-width:980px){ .product-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px){ .product-grid{ grid-template-columns:1fr; } }
 
 .p-card{
   border:1px solid var(--border);
@@ -950,13 +736,10 @@ body.admin-bar .mobile-menu{
   display:flex;
   flex-direction:column;
   min-height:420px;
+  transition:border-color .2s ease, box-shadow .2s ease;
 }
 
-@media (max-width:600px){
-  .p-card{
-    min-height:auto;
-  }
-}
+@media (max-width:600px){ .p-card{ min-height:auto; } }
 
 .p-card:hover{
   border-color:rgba(255,106,0,.35);
@@ -965,28 +748,31 @@ body.admin-bar .mobile-menu{
 
 .p-imgwrap{
   width:100%;
-  aspect-ratio:16 / 10;
+  aspect-ratio:4 / 3;
   background:rgba(255,255,255,.04);
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  padding:10px;
+  padding:16px;
+  text-decoration:none;
 }
 
-.p-img{
+.p-imgwrap img,
+.p-imgwrap .attachment-woocommerce_thumbnail{
   width:100%;
   height:100%;
   object-fit:contain;
   display:block;
+  max-height:200px;
 }
 
 .p-body{
   padding:14px;
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:8px;
   flex:1;
   min-height:0;
 }
@@ -998,15 +784,29 @@ body.admin-bar .mobile-menu{
   line-height:1.35;
 }
 
+.p-title a{
+  color:var(--text) !important;
+  text-decoration:none !important;
+}
+
+.p-title a:visited{ color:var(--text) !important; }
+.p-title a:hover{ color:var(--orange2) !important; }
+
 .p-desc{
   margin:0;
+  font-size:13px;
   color:var(--muted);
-  line-height:1.45;
+  line-height:1.5;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  line-clamp:2;
+  overflow:hidden;
 }
 
 .p-meta{
   display:flex;
-  gap:8px;
+  gap:6px;
   flex-wrap:wrap;
 }
 
@@ -1028,18 +828,29 @@ body.admin-bar .mobile-menu{
 
 .p-bottom{
   margin-top:auto;
+  padding-top:12px;
+  border-top:1px solid var(--border);
   display:flex;
-  align-items:flex-end;
+  align-items:center;
   justify-content:space-between;
   gap:10px;
+  flex-wrap:wrap;
 }
 
-.p-price .price{
+.p-price .price,
+.p-price .woocommerce-Price-amount{
   font-weight:900;
+  font-size:17px;
+  color:var(--orange2);
+  white-space:nowrap;
 }
 
-.p-price .muted{
+.p-price .muted{ font-size:13px; }
+
+.p-bottom .btn{
+  flex-shrink:0;
   font-size:13px;
+  padding:8px 14px;
 }
 
 /* -------------------------
@@ -1055,9 +866,7 @@ body.admin-bar .mobile-menu{
   padding:14px;
 }
 
-.modal.is-open{
-  display:flex;
-}
+.modal.is-open{ display:flex; }
 
 .modal__overlay{
   position:absolute;
@@ -1122,31 +931,11 @@ body.admin-bar .mobile-menu{
   max-height:calc(100dvh - 28px);
 }
 
-.modal__title{
-  margin:0;
-  font-size:22px;
-  font-weight:900;
-}
-
-.modal__price{
-  margin-top:10px;
-  font-weight:900;
-  font-size:18px;
-  color:var(--orange2);
-}
-
-.modal__desc{
-  margin:14px 0 0;
-}
-
-.modal__specs{
-  margin-top:14px;
-}
-
-.modal__specTitle{
-  font-weight:900;
-  margin-bottom:8px;
-}
+.modal__title{ margin:0; font-size:22px; font-weight:900; }
+.modal__price{ margin-top:10px; font-weight:900; font-size:18px; color:var(--orange2); }
+.modal__desc{ margin:14px 0 0; }
+.modal__specs{ margin-top:14px; }
+.modal__specTitle{ font-weight:900; margin-bottom:8px; }
 
 .modal__specs ul{
   margin:0;
@@ -1155,12 +944,7 @@ body.admin-bar .mobile-menu{
   line-height:1.6;
 }
 
-.modal__actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
+.modal__actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
 
 .modal__hint{
   margin:14px 0 0;
@@ -1170,56 +954,29 @@ body.admin-bar .mobile-menu{
 }
 
 @media (max-width:980px){
-  .modal__grid{
-    display:flex;
-    flex-direction:column;
-  }
-
-  .modal__media{
-    border-right:none;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    padding:12px;
-  }
-
-  .modal__media img{
-    max-height:34vh;
-  }
-
-  .modal__content{
-    padding:14px;
-  }
+  .modal__grid{ display:flex; flex-direction:column; }
+  .modal__media{ border-right:none; border-bottom:1px solid rgba(255,255,255,.08); padding:12px; }
+  .modal__media img{ max-height:34vh; }
+  .modal__content{ padding:14px; }
 }
 
 @media (max-width:520px){
-  .modal{
-    padding:10px;
-  }
-
-  .modal__dialog{
-    max-height:calc(100dvh - 20px);
-  }
-
-  .modal__title{
-    font-size:20px;
-  }
+  .modal{ padding:10px; }
+  .modal__dialog{ max-height:calc(100dvh - 20px); }
+  .modal__title{ font-size:20px; }
 }
 
 /* -------------------------
    12) Desktop catalog dropdown OFF
    ------------------------- */
 @media (min-width:981px){
-  .desktop-nav .menu > li.menu-item-has-children > a::after{
-    content:none !important;
-  }
-
-  .desktop-nav .menu > li.menu-item-has-children > .sub-menu{
-    display:none !important;
-  }
+  .desktop-nav .menu > li.menu-item-has-children > a::after{ content:none !important; }
+  .desktop-nav .menu > li.menu-item-has-children > .sub-menu{ display:none !important; }
 }
 
-/* =========================================================
-   13) MOBILE SUBMENU (Click via .is-open)
-   ========================================================= */
+/* -------------------------
+   13) Mobile Submenu
+   ------------------------- */
 @media (max-width:980px){
   .mobile-nav .sub-menu{
     display:none;
@@ -1228,15 +985,8 @@ body.admin-bar .mobile-menu{
     list-style:none;
   }
 
-  .mobile-nav li.is-open > .sub-menu{
-    display:grid;
-    gap:10px;
-  }
-
-  .mobile-nav li.is-open > .sub-menu li{
-    display:flex;
-    justify-content:center;
-  }
+  .mobile-nav li.is-open > .sub-menu{ display:grid; gap:10px; }
+  .mobile-nav li.is-open > .sub-menu li{ display:flex; justify-content:center; }
 
   .mobile-nav .sub-menu a{
     height:52px;
@@ -1317,15 +1067,9 @@ body.admin-bar .mobile-menu{
 }
 
 .filter-select option,
-.filter-select optgroup{
-  background:#0f141b;
-  color:#f3f4f6;
-}
+.filter-select optgroup{ background:#0f141b; color:#f3f4f6; }
 
-.filter-bar .btn{
-  height:44px;
-  white-space:nowrap;
-}
+.filter-bar .btn{ height:44px; white-space:nowrap; }
 
 .filter-empty{
   margin-top:12px;
@@ -1343,30 +1087,18 @@ body.admin-bar .mobile-menu{
 }
 
 @media (max-width:520px){
-  .filter-bar{
-    grid-template-columns:1fr;
-    padding:12px;
-  }
+  .filter-bar{ grid-template-columns:1fr; padding:12px; }
   .filter-input,
   .filter-select,
-  .filter-bar .btn{
-    height:46px;
-    font-size:15px;
-  }
+  .filter-bar .btn{ height:46px; font-size:15px; }
 }
 
 /* -------------------------
    15) WPForms
    ------------------------- */
 .wpforms-container{ margin-top:16px; }
-
 .wpforms-form{ display:grid; gap:14px; }
-
-.wpforms-field-label{
-  color:var(--text);
-  font-weight:700;
-  margin-bottom:6px;
-}
+.wpforms-field-label{ color:var(--text); font-weight:700; margin-bottom:6px; }
 
 .wpforms-field input,
 .wpforms-field textarea{
@@ -1411,9 +1143,9 @@ body.admin-bar .mobile-menu{
   color:#b8ffd6;
 }
 
-/* =========================================================
-   REVIEWS — GOLD STARS
-   ========================================================= */
+/* -------------------------
+   16) Reviews
+   ------------------------- */
 .review-card .rating,
 .review-card .stars,
 .review-stars{
@@ -1423,20 +1155,16 @@ body.admin-bar .mobile-menu{
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  text-shadow:
-    0 0 8px rgba(212,175,55,.25),
-    0 0 18px rgba(184,134,11,.18);
+  text-shadow:0 0 8px rgba(212,175,55,.25), 0 0 18px rgba(184,134,11,.18);
 }
 
-/* =========================================================
-   Banner + FAQ Box
-   ========================================================= */
+/* -------------------------
+   17) Banner + FAQ Box
+   ------------------------- */
 .banner::before,
 .banner::after,
 .faq-box::before,
-.faq-box::after{
-  content:none !important;
-}
+.faq-box::after{ content:none !important; }
 
 .banner,
 .faq-box{
@@ -1446,9 +1174,7 @@ body.admin-bar .mobile-menu{
   background:rgba(15,20,27,.70);
   overflow:hidden;
   outline:1px solid rgba(255,138,31,.10);
-  box-shadow:
-    0 18px 50px rgba(0,0,0,.35),
-    inset 0 0 0 1px rgba(255,255,255,.04);
+  box-shadow:0 18px 50px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
 }
 
 .banner{
@@ -1480,396 +1206,1978 @@ body.admin-bar .mobile-menu{
 .banner:hover,
 .faq-box:hover{
   border-color:rgba(255,106,0,.30);
-  box-shadow:
-    0 22px 60px rgba(0,0,0,.42),
-    0 0 0 4px rgba(255,106,0,.06),
-    inset 0 0 0 1px rgba(255,255,255,.05);
+  box-shadow:0 22px 60px rgba(0,0,0,.42), 0 0 0 4px rgba(255,106,0,.06), inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
-.faq-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-shrink:0;
-}
+.faq-actions{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
 
 @media (max-width:600px){
   .banner,
-  .faq-box{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-  }
+  .faq-box{ flex-direction:column; align-items:flex-start; gap:12px; }
   .banner > div:first-child{ max-width:100%; }
-  .faq-actions{
-    width:100%;
-    justify-content:flex-start;
-    margin-top:12px;
-  }
+  .faq-actions{ width:100%; justify-content:flex-start; margin-top:12px; }
 }
 
-/* =========================================================
-   MOBILE: force 1 column
-   ========================================================= */
+/* -------------------------
+   18) Mobile: force 1 column
+   ------------------------- */
 @media (max-width:600px){
-  .grid,
-  .grid-4,
-  .grid-3,
-  .product-grid{
-    grid-template-columns:1fr !important;
-  }
-
-  .why-grid,
-  .why-cards,
-  .features-grid,
-  .advantages-grid{
+  .grid,.grid-4,.grid-3,.product-grid{ grid-template-columns:1fr !important; }
+  .why-grid,.why-cards,.features-grid,.advantages-grid{
     display:grid !important;
     grid-template-columns:1fr !important;
     gap:14px !important;
   }
 }
 
-/* Catalog Layout */
-.catalog-layout {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 28px;
-  margin-top: 24px;
-  align-items: start;
+/* =========================================================
+   19) Catalog: таби категорій
+   ========================================================= */
+.cat-tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:20px 0 24px;
 }
 
-.catalog-sidebar {
-  position: sticky;
-  top: calc(var(--headerH) + 20px);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
+.cat-tab{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 16px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  white-space:nowrap;
+  transition:all .2s ease;
 }
 
-.catalog-sidebar h3 {
-  margin: 0 0 14px;
-  font-size: 15px;
-  font-weight: 900;
-  color: var(--text);
+.cat-tab:hover{
+  background:rgba(255,106,0,.10);
+  border-color:rgba(255,106,0,.35);
+  color:var(--orange2);
 }
 
-.cat-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 6px;
-}
-
-.cat-list a {
-  display: block;
-  padding: 9px 12px;
-  border-radius: 12px;
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-  opacity: .8;
-  border: 1px solid transparent;
-  transition: all .2s ease;
-}
-
-.cat-list a:hover,
-.cat-list a.active {
-  opacity: 1;
-  background: rgba(255,106,0,.12);
-  border-color: rgba(255,106,0,.35);
-  color: var(--orange2);
-}
-
-/* Product page */
-.product-page {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: start;
-}
-
-.product-price {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--orange2);
-  margin-top: 14px;
-}
-
-.product-excerpt {
-  margin-top: 14px;
-  line-height: 1.6;
-}
-
-.product-desc {
-  margin-top: 16px;
-  line-height: 1.7;
-  color: var(--muted);
-}
-
-.product-cart-btn {
-  margin-top: 24px;
-}
-
-/* Адаптив каталогу */
-@media (max-width: 900px) {
-  .catalog-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .catalog-sidebar {
-    position: static;
-  }
-
-  .product-page {
-    grid-template-columns: 1fr;
-  }
+.cat-tab.active{
+  background:rgba(255,106,0,.18);
+  border-color:rgba(255,106,0,.50);
+  color:var(--orange2);
+  font-weight:800;
 }
 
 /* =========================================================
-   WOOCOMMERCE — перевизначення стилів
+   20) Product page (single)
    ========================================================= */
-
-/* Ціна — прибираємо перенос */
-.p-price .price,
-.p-price .woocommerce-Price-amount {
-  font-weight: 900;
-  font-size: 17px;
-  color: var(--orange2);
-  white-space: nowrap;
+.product-page{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  align-items:start;
 }
 
-/* Назва товару — прибираємо фіолетовий колір WC */
-.p-title a {
-  color: var(--text) !important;
-  text-decoration: none !important;
+.product-gallery img{
+  width:100%;
+  border-radius:16px;
+  border:1px solid var(--border);
 }
 
-.p-title a:visited {
-  color: var(--text) !important;
+.product-price{
+  font-size:24px;
+  font-weight:900;
+  color:var(--orange2);
+  margin-top:14px;
 }
 
-.p-title a:hover {
-  color: var(--orange2) !important;
+.product-excerpt{ margin-top:14px; line-height:1.6; }
+
+.product-desc{
+  margin-top:16px;
+  line-height:1.7;
+  color:var(--muted);
 }
 
-/* Картки — рівна висота */
-.product-grid {
-  align-items: stretch;
+.product-cart-btn{ margin-top:24px; }
+
+/* WC кнопка "Додати в кошик" */
+.product-cart-btn .single_add_to_cart_button,
+.product-cart-btn button[type="submit"],
+.woocommerce .product-cart-btn .button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  padding:12px 24px !important;
+  border-radius:14px !important;
+  border:1px solid rgba(255,106,0,.45) !important;
+  background:rgba(255,106,0,.22) !important;
+  color:var(--text) !important;
+  font-weight:800 !important;
+  font-size:16px !important;
+  cursor:pointer !important;
+  transition:background .2s ease, transform .15s ease !important;
+  text-decoration:none !important;
 }
 
-.p-card {
-  display: flex;
-  flex-direction: column;
+.product-cart-btn .single_add_to_cart_button:hover,
+.product-cart-btn button[type="submit"]:hover{
+  background:rgba(255,106,0,.35) !important;
+  transform:translateY(-1px) !important;
 }
 
-.p-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+/* Кількість */
+.product-cart-btn .quantity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:14px;
 }
 
-.p-bottom {
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
+.product-cart-btn .quantity input{
+  width:70px;
+  height:44px;
+  padding:0 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  font-size:16px;
+  font-weight:700;
+  text-align:center;
+  outline:none;
 }
 
-/* Кнопка детальніше */
-.p-bottom .btn {
-  flex-shrink: 0;
-  font-size: 13px;
-  padding: 8px 14px;
+.product-cart-btn .quantity input:focus{
+  border-color:rgba(255,106,0,.45);
+  box-shadow:0 0 0 4px rgba(255,106,0,.12);
 }
 
-/* Зображення в картці */
+@media (max-width:900px){
+  .product-page{ grid-template-columns:1fr; }
+}
+
+/* =========================================================
+   21) WooCommerce pagination
+   ========================================================= */
+.woocommerce-pagination{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+
+.woocommerce-pagination .page-numbers{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:40px;
+  height:40px;
+  padding:0 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  transition:all .2s ease;
+}
+
+.woocommerce-pagination .page-numbers:hover,
+.woocommerce-pagination .page-numbers.current{
+  background:rgba(255,106,0,.18);
+  border-color:rgba(255,106,0,.45);
+  color:var(--orange2);
+}
+
+/* =========================================================
+   Product card hover actions
+   ========================================================= */
 .p-imgwrap {
+  position: relative;
+}
+
+.p-img-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,.04);
-  border-bottom: 1px solid var(--border);
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  padding: 16px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
 }
 
-.p-imgwrap img,
-.p-imgwrap .attachment-woocommerce_thumbnail {
+.p-img-link img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
   max-height: 200px;
+  display: block;
 }
 
-/* Sidebar — прибираємо "Без категорії" */
-.cat-list a[href*="uncategorized"] {
-  display: none;
-}
-
-/* Sidebar активна категорія */
-.cat-list a.active {
-  background: rgba(255,106,0,.15);
-  border-color: rgba(255,106,0,.45);
-  color: var(--orange2);
-  font-weight: 800;
-}
-
-/* Бейдж наявності */
-.p-meta {
+/* Кнопки на фото — приховані за замовчуванням */
+.p-hover-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
-/* Опис товару в картці */
-.p-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.5;
-  margin: 6px 0 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  overflow: hidden;
-}
-
-/* Категорії — горизонтальні таби */
-.cat-tabs {
-  display: flex;
+  flex-direction: column;
   gap: 8px;
-  flex-wrap: wrap;
-  margin: 20px 0 24px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 5;
 }
 
-.cat-tab {
+/* Показуємо при hover на картку */
+.p-card:hover .p-hover-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Кнопка обране/порівняння на картці */
+.p-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(15, 20, 27, .85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s ease;
+  padding: 0;
+}
+
+.p-action-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: rgba(243,244,246,.8);
+  fill: none;
+  transition: stroke .2s ease, fill .25s ease;
+}
+
+.p-action-btn:hover {
+  background: rgba(255,106,0,.15);
+  border-color: rgba(255,106,0,.4);
+}
+
+.p-action-btn:hover svg {
+  stroke: var(--orange2);
+}
+
+/* Активний стан — обране заповнене */
+.p-action-btn.wishlist-btn.is-active svg {
+  fill: #e53e3e;
+  stroke: #e53e3e;
+}
+
+.p-action-btn.wishlist-btn.is-active {
+  border-color: rgba(229,62,62,.4);
+  background: rgba(229,62,62,.1);
+}
+
+/* Анімація серця при додаванні */
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.p-action-btn.wishlist-btn.heart-pop svg {
+  animation: heartPop .4s ease forwards;
+}
+
+/* =========================================================
+   Single product actions
+   ========================================================= */
+.single-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.single-action-btn {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
   background: rgba(255,255,255,.04);
   color: var(--text);
-  text-decoration: none;
-  font-weight: 700;
   font-size: 14px;
-  white-space: nowrap;
+  font-weight: 700;
+  cursor: pointer;
   transition: all .2s ease;
+  flex: 1;
+  justify-content: center;
 }
 
-.cat-tab:hover {
+.single-action-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  flex-shrink: 0;
+  transition: fill .25s ease, stroke .2s ease;
+}
+
+.single-action-btn:hover {
   background: rgba(255,106,0,.10);
   border-color: rgba(255,106,0,.35);
   color: var(--orange2);
 }
 
-.cat-tab.active {
-  background: rgba(255,106,0,.18);
-  border-color: rgba(255,106,0,.50);
+/* Активний стан обраного */
+.single-action-btn.wishlist-btn.is-active {
+  background: rgba(229,62,62,.12);
+  border-color: rgba(229,62,62,.4);
+  color: #fc8181;
+}
+
+.single-action-btn.wishlist-btn.is-active svg {
+  fill: #e53e3e;
+  stroke: #e53e3e;
+}
+
+@keyframes heartPopBig {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  70%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+.single-action-btn.wishlist-btn.heart-pop svg {
+  animation: heartPopBig .4s ease forwards;
+}
+
+/* Лічильник обраного в шапці */
+.wishlist-count {
+  background: #e53e3e;
+}
+
+/* Активний стан порівняння на картці */
+.p-action-btn.compare-btn.is-active svg {
+  stroke: var(--orange2);
+}
+
+.p-action-btn.compare-btn.is-active {
+  border-color: rgba(255,106,0,.4);
+  background: rgba(255,106,0,.15);
+}
+
+/* Анімація іконки порівняння */
+@keyframes comparePop {
+  0%   { transform: scaleY(1); }
+  40%  { transform: scaleY(1.3); }
+  70%  { transform: scaleY(0.9); }
+  100% { transform: scaleY(1); }
+}
+
+.p-action-btn.compare-btn.compare-pop svg {
+  animation: comparePop .35s ease forwards;
+}
+
+/* Активний стан порівняння на single product */
+.single-action-btn.compare-btn.is-active {
+  background: rgba(255,106,0,.10);
+  border-color: rgba(255,106,0,.35);
   color: var(--orange2);
-  font-weight: 800;
 }
 
-.catalog-layout {
-  display: block;
+.single-action-btn.compare-btn.is-active svg {
+  stroke: var(--orange2);
 }
 
-/* Прибираємо старий catalog-layout grid — тепер display:block */
-.catalog-layout {
-  display: block;
+@keyframes comparePopBig {
+  0%   { transform: scaleY(1); }
+  40%  { transform: scaleY(1.35); }
+  70%  { transform: scaleY(0.9); }
+  100% { transform: scaleY(1); }
 }
+
+.single-action-btn.compare-btn.compare-pop svg {
+  animation: comparePopBig .35s ease forwards;
+}
+
 
 /* =========================================================
-   WOOCOMMERCE — кнопка "Додати в кошик"
+   MY ACCOUNT — DIS Store
    ========================================================= */
-.product-cart-btn .single_add_to_cart_button,
-.product-cart-btn button[type="submit"],
-.woocommerce .product-cart-btn .button {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 12px 24px !important;
-  border-radius: 14px !important;
-  border: 1px solid rgba(255,106,0,.45) !important;
-  background: rgba(255,106,0,.22) !important;
-  color: var(--text) !important;
-  font-weight: 800 !important;
-  font-size: 16px !important;
-  cursor: pointer !important;
-  transition: background .2s ease, transform .15s ease !important;
-  text-decoration: none !important;
-  width: 100% !important;
+
+/* Layout: sidebar + content */
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
 }
 
-.product-cart-btn .single_add_to_cart_button:hover,
-.product-cart-btn button[type="submit"]:hover {
-  background: rgba(255,106,0,.35) !important;
-  transform: translateY(-1px) !important;
+@media (max-width: 860px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* Кількість товару */
-.product-cart-btn .quantity {
+/* ---- Sidebar ---- */
+.account-sidebar {
+  position: sticky;
+  top: calc(var(--headerH) + 20px);
+}
+
+.account-user-card {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: 14px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(255,106,0,.10), rgba(255,106,0,.04));
+  border: 1px solid rgba(255,106,0,.22);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
 }
 
-.product-cart-btn .quantity input {
-  width: 70px;
-  height: 44px;
-  padding: 0 12px;
+.account-avatar {
+  flex-shrink: 0;
+}
+
+.account-avatar-img {
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 50%;
+  border: 2px solid rgba(255,106,0,.4);
+  display: block;
+}
+
+.account-user-name {
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.account-user-email {
+  font-size: 12px;
+  margin-top: 2px;
+  word-break: break-all;
+}
+
+/* Nav */
+.account-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.account-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.12);
+  border: 1px solid transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background .18s, border-color .18s, color .18s;
+  position: relative;
+}
+
+.account-nav-item:hover {
+  background: rgba(255,255,255,.05);
+  border-color: var(--border);
+  color: var(--orange2);
+}
+
+.account-nav-item.is-active {
+  background: rgba(255,106,0,.12);
+  border-color: rgba(255,106,0,.30);
+  color: var(--orange2);
+}
+
+.account-nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.account-nav-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+/* Logout — акцент */
+.account-nav-item[href*="logout"] {
+  color: rgba(252,129,129,.85);
+}
+.account-nav-item[href*="logout"]:hover {
+  background: rgba(229,62,62,.08);
+  border-color: rgba(229,62,62,.25);
+  color: #fc8181;
+}
+.account-nav-item[href*="logout"].is-active {
+  background: rgba(229,62,62,.08);
+  border-color: rgba(229,62,62,.25);
+  color: #fc8181;
+}
+
+/* Badge (лічильник замовлень) */
+.account-nav-badge {
+  margin-left: auto;
+  background: var(--orange);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+/* ---- Content ---- */
+.account-content {
+  min-width: 0;
+}
+
+/* WooCommerce повідомлення */
+.account-content .woocommerce-message,
+.account-content .woocommerce-info,
+.account-content .woocommerce-error {
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid;
+  margin-bottom: 20px;
+  font-size: 14px;
+  list-style: none;
+}
+.account-content .woocommerce-message {
+  background: rgba(72,187,120,.08);
+  border-color: rgba(72,187,120,.3);
+  color: #9ae6b4;
+}
+.account-content .woocommerce-info {
+  background: rgba(66,153,225,.08);
+  border-color: rgba(66,153,225,.3);
+  color: #90cdf4;
+}
+.account-content .woocommerce-error {
+  background: rgba(229,62,62,.08);
+  border-color: rgba(229,62,62,.3);
+  color: #fc8181;
+}
+
+/* WooCommerce таблиця замовлень */
+.account-content .woocommerce-orders-table,
+.account-content .woocommerce-MyAccount-downloads-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.account-content .woocommerce-orders-table th,
+.account-content .woocommerce-MyAccount-downloads-table th {
+  text-align: left;
+  padding: 10px 14px;
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.account-content .woocommerce-orders-table td,
+.account-content .woocommerce-MyAccount-downloads-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.account-content .woocommerce-orders-table tr:last-child td,
+.account-content .woocommerce-MyAccount-downloads-table tr:last-child td {
+  border-bottom: none;
+}
+
+.account-content .woocommerce-orders-table tr:hover td {
+  background: rgba(255,255,255,.025);
+}
+
+/* Статуси замовлень */
+.account-content .woocommerce-orders-table .order-status,
+.account-content mark.order-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+}
+.account-content mark.order-status.status-processing {
+  background: rgba(66,153,225,.12);
+  color: #90cdf4;
+}
+.account-content mark.order-status.status-completed {
+  background: rgba(72,187,120,.12);
+  color: #9ae6b4;
+}
+.account-content mark.order-status.status-cancelled,
+.account-content mark.order-status.status-failed {
+  background: rgba(229,62,62,.10);
+  color: #fc8181;
+}
+.account-content mark.order-status.status-pending,
+.account-content mark.order-status.status-on-hold {
+  background: rgba(237,137,54,.10);
+  color: #f6ad55;
+}
+
+/* Кнопки в таблиці */
+.account-content .woocommerce-orders-table .button,
+.account-content .button {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.14);
   background: rgba(255,255,255,.06);
   color: var(--text);
-  font-size: 16px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background .2s, border-color .2s;
+  cursor: pointer;
+}
+.account-content .woocommerce-orders-table .button:hover,
+.account-content .button:hover {
+  background: rgba(255,106,0,.15);
+  border-color: rgba(255,106,0,.35);
+  color: var(--orange2);
+}
+
+/* Форми (особисті дані, адреси) */
+.account-content .woocommerce-EditAccountForm,
+.account-content .woocommerce-address-fields,
+.account-content .edit-account {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.account-content .woocommerce-form-row,
+.account-content .form-row {
+  margin-bottom: 16px;
+}
+
+.account-content .woocommerce-form-row label,
+.account-content .form-row label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.account-content .woocommerce-form-row input,
+.account-content .woocommerce-form-row select,
+.account-content .form-row input,
+.account-content .form-row select,
+.account-content .form-row textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s;
+  box-sizing: border-box;
+}
+
+.account-content .woocommerce-form-row input:focus,
+.account-content .woocommerce-form-row select:focus,
+.account-content .form-row input:focus,
+.account-content .form-row select:focus {
+  border-color: rgba(255,106,0,.45);
+}
+
+.account-content .woocommerce-form-row input[type="password"] {
+  font-family: monospace;
+}
+
+/* Fieldset для паролю */
+.account-content fieldset {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 10px 0 16px;
+}
+.account-content fieldset legend {
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* Кнопка submit у формах */
+.account-content .woocommerce-Button,
+.account-content input[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,106,0,.35);
+  background: rgba(255,106,0,.18);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s;
+  margin-top: 8px;
+}
+.account-content .woocommerce-Button:hover,
+.account-content input[type="submit"]:hover {
+  background: rgba(255,106,0,.28);
+  border-color: rgba(255,106,0,.55);
+  transform: translateY(-1px);
+}
+
+/* Сітка адрес */
+.account-content .woocommerce-MyAccount-content .u-columns,
+.account-content .addresses .u-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 600px) {
+  .account-content .addresses .u-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.account-content .woocommerce-Address {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.account-content .woocommerce-Address-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.account-content .woocommerce-Address-title h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* ---- Dashboard ---- */
+.account-welcome {
+  margin-bottom: 24px;
+}
+
+.account-welcome-title {
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0 0 6px;
+}
+
+/* Стат-картки */
+.account-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 640px) {
+  .account-stats { grid-template-columns: 1fr 1fr; }
+}
+
+.account-stat-card {
+  background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-stat-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--orange2);
+}
+
+.account-stat-value {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.account-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Секція заголовок */
+.account-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 12px;
+  margin-top: 28px;
+}
+.account-section-title:first-child { margin-top: 0; }
+
+/* Останнє замовлення */
+.account-last-order {
+  margin-bottom: 4px;
+}
+
+.account-order-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  flex-wrap: wrap;
+}
+
+.account-order-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.account-order-num {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.account-order-status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+}
+.account-order-status.status-processing { background: rgba(66,153,225,.12); color: #90cdf4; }
+.account-order-status.status-completed  { background: rgba(72,187,120,.12);  color: #9ae6b4; }
+.account-order-status.status-cancelled,
+.account-order-status.status-failed     { background: rgba(229,62,62,.10);   color: #fc8181; }
+.account-order-status.status-pending,
+.account-order-status.status-on-hold    { background: rgba(237,137,54,.10);  color: #f6ad55; }
+
+.account-order-total {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+/* Швидкі дії */
+.account-quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.account-quick-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  transition: background .18s, border-color .18s, transform .15s;
+}
+
+.account-quick-card svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--orange2);
+}
+
+.account-quick-card:hover {
+  background: rgba(255,106,0,.10);
+  border-color: rgba(255,106,0,.30);
+  transform: translateY(-2px);
+}
+
+/* ---- WC заголовок сторінки ---- */
+.account-content .woocommerce-MyAccount-content > h2,
+.account-content .woocommerce-MyAccount-content > h3 {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0 0 20px;
+}
+
+/* Приховати стандартний WC account title */
+.woocommerce-account .page-title { display: none; }
+
+
+/* =========================================================
+   CART PAGE — DIS Store
+   ========================================================= */
+
+.cart-page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cart-page-head .page-title {
+  margin: 0;
+}
+
+/* Порожній кошик */
+.cart-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.cart-empty-icon svg {
+  width: 72px;
+  height: 72px;
+  stroke: rgba(255,255,255,.15);
+}
+
+.cart-empty-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Layout: items + totals */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Items list ---- */
+.cart-items-list {
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* Header row */
+.cart-items-header {
+  display: grid;
+  grid-template-columns: 72px 1fr 110px 100px 100px 44px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+@media (max-width: 680px) {
+  .cart-items-header { display: none; }
+}
+
+/* Item row */
+.cart-item {
+  display: grid;
+  grid-template-columns: 72px 1fr 110px 100px 100px 44px;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item:hover {
+  background: rgba(255,255,255,.025);
+}
+
+@media (max-width: 680px) {
+  .cart-item {
+    grid-template-columns: 64px 1fr 44px;
+    grid-template-rows: auto auto auto;
+    gap: 8px;
+  }
+  .cart-col-price,
+  .cart-col-qty,
+  .cart-col-sub { grid-column: 2; }
+  .cart-col-rm  { grid-row: 1; grid-column: 3; }
+}
+
+/* Фото товару */
+.cart-item-img {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.cart-item-img img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  display: block;
+}
+
+/* Назва */
+.cart-item-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  display: block;
+  line-height: 1.4;
+}
+
+.cart-item-name:hover { color: var(--orange2); }
+
+.cart-item-info .variation,
+.cart-item-info .wc-item-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Ціна / кількість / сума */
+.cart-item-price,
+.cart-item-subtotal {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Quantity input у кошику */
+.cart-item .quantity,
+.cart-item .qty-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.cart-item input.qty,
+.cart-item input[type="number"] {
+  width: 52px;
+  padding: 7px 8px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14px;
   font-weight: 700;
   text-align: center;
   outline: none;
 }
 
-.product-cart-btn .quantity input:focus {
-  border-color: rgba(255,106,0,.45);
-  box-shadow: 0 0 0 4px rgba(255,106,0,.12);
+.cart-item input.qty:focus {
+  border-color: rgba(255,106,0,.4);
 }
 
-/* WC pagination */
-.woocommerce-pagination {
+/* Кнопка видалити */
+.cart-remove-btn {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  text-decoration: none;
+  transition: all .2s;
+}
+
+.cart-remove-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
+.cart-remove-btn:hover {
+  background: rgba(229,62,62,.1);
+  border-color: rgba(229,62,62,.3);
+  color: #fc8181;
+}
+
+/* Дії: купон + оновити */
+.cart-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
-.woocommerce-pagination .page-numbers {
-  display: inline-flex;
+.cart-coupon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.cart-coupon-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.cart-coupon-input:focus {
+  border-color: rgba(255,106,0,.4);
+}
+
+.cart-update-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- Cart totals (права колонка) ---- */
+.dis-cart-totals {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  position: sticky;
+  top: calc(var(--headerH) + 16px);
+}
+
+.cart-totals-title {
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.cart-totals-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 20px;
+}
+
+.cart-totals-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  gap: 12px;
+}
+
+.cart-totals-row:last-child {
+  border-bottom: none;
+}
+
+/* WC shipping row override */
+.dis-cart-totals .shipping th,
+.dis-cart-totals .shipping td {
+  display: contents;
+}
+
+.dis-cart-totals tr.shipping {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+/* Знижка */
+.cart-totals-discount-val {
+  color: #9ae6b4;
+}
+
+/* Разом */
+.cart-totals-total {
+  font-size: 16px;
+  font-weight: 900;
+  border-bottom: none !important;
+  padding-top: 14px !important;
+  border-top: 1px solid var(--border);
+}
+
+/* Кнопка оформити */
+.dis-cart-totals .wc-proceed-to-checkout {
+  margin-top: 18px;
+}
+
+.dis-cart-totals .wc-proceed-to-checkout a,
+.dis-cart-totals .checkout-button {
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
-  height: 40px;
-  padding: 0 12px;
-  border-radius: 12px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,106,0,.5) !important;
+  background: rgba(255,106,0,.22) !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  box-sizing: border-box;
+}
+
+.dis-cart-totals .checkout-button:hover {
+  background: rgba(255,106,0,.35) !important;
+  transform: translateY(-1px);
+}
+
+/* Трастові знаки */
+.cart-trust-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.cart-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.cart-trust-item svg {
+  stroke: var(--orange2);
+  flex-shrink: 0;
+}
+
+/* WC coupon block всередині totals */
+.dis-cart-totals .blockOverlay { border-radius: var(--radius); }
+
+/* Повідомлення про купон */
+.dis-cart-totals .woocommerce-message {
+  padding: 10px 14px;
+  background: rgba(72,187,120,.08);
+  border: 1px solid rgba(72,187,120,.3);
+  border-radius: 10px;
+  color: #9ae6b4;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* =========================================================
+   WISHLIST PAGE — DIS Store
+   ========================================================= */
+
+/* Обгортка сторінки */
+.woocommerce-wishlist .woocommerce,
+.yith-wcwl-form {
+  background: transparent !important;
+}
+
+/* Заголовок wishlist */
+.wishlist-title h2,
+.wishlist-title-container h2 {
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  color: var(--text) !important;
+  margin-bottom: 24px !important;
+}
+
+/* Таблиця обраного */
+.wishlist_table.shop_table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025)) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden;
+  color: var(--text) !important;
+}
+
+/* Заголовки стовпців */
+.wishlist_table thead tr {
+  background: transparent !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.wishlist_table thead th {
+  padding: 12px 16px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .05em !important;
+  background: transparent !important;
+  border: none !important;
+  white-space: nowrap;
+}
+
+/* Рядки товарів */
+.wishlist_table tbody tr {
+  border-bottom: 1px solid var(--border) !important;
+  background: transparent !important;
+  transition: background .15s;
+}
+
+.wishlist_table tbody tr:last-child {
+  border-bottom: none !important;
+}
+
+.wishlist_table tbody tr:hover {
+  background: rgba(255,255,255,.025) !important;
+}
+
+.wishlist_table tbody td {
+  padding: 14px 16px !important;
+  border: none !important;
+  vertical-align: middle !important;
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+/* Фото */
+.wishlist_table .product-thumbnail img {
+  width: 68px !important;
+  height: 68px !important;
+  object-fit: contain !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--border) !important;
+  background: rgba(255,255,255,.04) !important;
+}
+
+/* Назва */
+.wishlist_table .product-name a {
+  color: var(--text) !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+
+.wishlist_table .product-name a:hover {
+  color: var(--orange2) !important;
+}
+
+/* Ціна */
+.wishlist_table .product-price,
+.wishlist_table .product-price .woocommerce-Price-amount {
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: var(--text) !important;
+}
+
+/* Статус наявності */
+.wishlist_table .product-stock-status .available {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(72,187,120,.12);
+  color: #9ae6b4;
+}
+
+.wishlist_table .product-stock-status .out-of-stock {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(229,62,62,.10);
+  color: #fc8181;
+}
+
+/* Кнопка "Видалити" */
+.wishlist_table .product-remove a,
+.wishlist_table .remove_from_wishlist {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: var(--muted) !important;
+  font-size: 18px !important;
+  text-decoration: none !important;
+  transition: all .2s !important;
+}
+
+.wishlist_table .product-remove a:hover,
+.wishlist_table .remove_from_wishlist:hover {
+  background: rgba(229,62,62,.1) !important;
+  border-color: rgba(229,62,62,.3) !important;
+  color: #fc8181 !important;
+}
+
+/* Кнопка "У кошик" */
+.wishlist_table .product-add-to-cart .button,
+.wishlist_table .add_to_cart_button,
+.wishlist_table .single_add_to_cart_button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 9px 16px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,106,0,.35) !important;
+  background: rgba(255,106,0,.18) !important;
+  color: var(--text) !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background .2s, border-color .2s !important;
+  white-space: nowrap !important;
+}
+
+.wishlist_table .add_to_cart_button:hover,
+.wishlist_table .single_add_to_cart_button:hover {
+  background: rgba(255,106,0,.28) !important;
+  border-color: rgba(255,106,0,.55) !important;
+}
+
+/* Footer wishlist: кнопки внизу */
+.wishlist-items-wrapper .wishlist-action-buttons {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.wishlist-items-wrapper .button,
+.yith-wcwl-form .button {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 10px 18px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  background: rgba(255,255,255,.06) !important;
+  color: var(--text) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all .2s !important;
+}
+
+/* Повідомлення wishlist (зелений тост) */
+.yith-wcwl-form .woocommerce-message {
+  padding: 14px 18px !important;
+  background: rgba(72,187,120,.08) !important;
+  border: 1px solid rgba(72,187,120,.3) !important;
+  border-radius: 12px !important;
+  color: #9ae6b4 !important;
+  font-size: 14px !important;
+  margin-bottom: 20px !important;
+  list-style: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.yith-wcwl-form .woocommerce-message .button {
+  padding: 8px 14px !important;
+  border: 1px solid rgba(72,187,120,.4) !important;
+  background: rgba(72,187,120,.12) !important;
+  color: #9ae6b4 !important;
+  border-radius: 10px !important;
+}
+
+/* Порожній список */
+.wishlist_table td.wishlist-empty,
+.wishlist_table .wishlist-items-empty td {
+  text-align: center !important;
+  padding: 60px 20px !important;
+  color: var(--muted) !important;
+  font-size: 16px !important;
+}
+
+/* Прибрати білий фон WC */
+.woocommerce-wishlist .woocommerce,
+.woocommerce-wishlist .woocommerce-page,
+.yith-wcwl-form {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+
+/* Pagination */
+.wishlist_table + .woocommerce-pagination .page-numbers {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.wishlist_table + .woocommerce-pagination .page-numbers a,
+.wishlist_table + .woocommerce-pagination .page-numbers span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   border: 1px solid var(--border);
   background: rgba(255,255,255,.04);
   color: var(--text);
   text-decoration: none;
+  font-size: 14px;
   font-weight: 700;
-  transition: all .2s ease;
 }
 
-.woocommerce-pagination .page-numbers:hover,
-.woocommerce-pagination .page-numbers.current {
+.wishlist_table + .woocommerce-pagination .page-numbers .current {
   background: rgba(255,106,0,.18);
-  border-color: rgba(255,106,0,.45);
+  border-color: rgba(255,106,0,.4);
   color: var(--orange2);
+}
+
+
+/* =========================================================
+   BLOCK CART (wp:woocommerce/cart) — DIS Store
+   ========================================================= */
+
+/* Загальна обгортка */
+.wp-block-woocommerce-cart,
+.wc-block-cart {
+  color: var(--text) !important;
+}
+
+/* ---- Таблиця товарів ---- */
+.wc-block-cart-items {
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025)) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
+}
+
+.wc-block-cart-items table,
+.wc-block-cart-items__table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  background: transparent !important;
+}
+
+/* Заголовки таблиці */
+.wc-block-cart-items__header,
+.wc-block-cart-items th {
+  padding: 12px 16px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .05em !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Рядки товарів */
+.wc-block-cart-items__row,
+.wc-block-cart-items td {
+  padding: 16px !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  vertical-align: middle !important;
+}
+
+.wc-block-cart-items tr:last-child td,
+.wc-block-cart-items__row:last-child {
+  border-bottom: none !important;
+}
+
+.wc-block-cart-items tr:hover td {
+  background: rgba(255,255,255,.025) !important;
+}
+
+/* Фото товару */
+.wc-block-cart-item__image img,
+.wc-block-cart-items .wc-block-cart-item__image a img {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: contain !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--border) !important;
+  background: rgba(255,255,255,.04) !important;
+}
+
+/* Назва і мета */
+.wc-block-cart-item__product-name,
+.wc-block-cart-item__product-name a {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  line-height: 1.4 !important;
+}
+
+.wc-block-cart-item__product-name a:hover {
+  color: var(--orange2) !important;
+}
+
+.wc-block-cart-item__product-metadata,
+.wc-block-cart-item__individual-prices {
+  font-size: 12px !important;
+  color: var(--muted) !important;
+  margin-top: 4px !important;
+}
+
+/* Ціна */
+.wc-block-cart-item__prices,
+.wc-block-cart-item__total-price,
+.wc-block-cart-item__prices .woocommerce-Price-amount,
+.wc-block-components-product-price {
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: var(--text) !important;
+}
+
+/* Quantity stepper */
+.wc-block-components-quantity-selector {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  background: rgba(255,255,255,.05) !important;
+  width: fit-content !important;
+}
+
+.wc-block-components-quantity-selector__button {
+  width: 36px !important;
+  height: 36px !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--text) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: background .15s, color .15s !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.wc-block-components-quantity-selector__button:hover {
+  background: rgba(255,106,0,.15) !important;
+  color: var(--orange2) !important;
+}
+
+.wc-block-components-quantity-selector__input {
+  width: 44px !important;
+  text-align: center !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 1px solid rgba(255,255,255,.1) !important;
+  border-right: 1px solid rgba(255,255,255,.1) !important;
+  color: var(--text) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+  height: 36px !important;
+  outline: none !important;
+}
+
+/* Кнопка видалити */
+.wc-block-cart-item__remove-link,
+.wc-block-cart-item__remove-link a,
+button.wc-block-cart-item__remove-link {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: color .2s !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+.wc-block-cart-item__remove-link:hover,
+button.wc-block-cart-item__remove-link:hover {
+  color: #fc8181 !important;
+}
+
+/* ---- Order summary (права колонка) ---- */
+.wp-block-woocommerce-cart-totals-block,
+.wc-block-cart__sidebar,
+.wc-block-components-order-summary {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
+  color: var(--text) !important;
+}
+
+/* Заголовок підсумку */
+.wp-block-woocommerce-cart-order-summary-heading-block h2,
+.wc-block-cart__totals-title,
+.wc-block-components-totals-wrapper .wc-block-components-title {
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  color: var(--text) !important;
+  padding: 18px 18px 0 !important;
+  margin: 0 !important;
+}
+
+/* Рядки підсумку */
+.wc-block-components-totals-item,
+.wc-block-components-totals-footer-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 11px 18px !important;
+  border-top: 1px solid var(--border) !important;
+  font-size: 14px !important;
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+.wc-block-components-totals-item:first-child {
+  border-top: none !important;
+}
+
+.wc-block-components-totals-item__label,
+.wc-block-components-totals-footer-item__label {
+  color: var(--text) !important;
+  font-weight: 600 !important;
+}
+
+.wc-block-components-totals-item__value,
+.wc-block-components-totals-footer-item__value,
+.wc-block-components-totals-item .woocommerce-Price-amount,
+.wc-block-components-totals-footer-item .woocommerce-Price-amount {
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+
+/* Разом */
+.wc-block-components-totals-footer-item {
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  border-top: 2px solid var(--border) !important;
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+
+/* Купон */
+.wc-block-components-totals-coupon__form,
+.wp-block-woocommerce-cart-order-summary-coupon-form-block {
+  padding: 12px 18px !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.wc-block-components-totals-coupon__form,
+.wc-block-components-coupon .wc-block-components-totals-coupon__form {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.wc-block-components-totals-coupon input,
+.wc-block-components-coupon input[type="text"] {
+  flex: 1 !important;
+  padding: 10px 14px !important;
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 12px !important;
+  color: var(--text) !important;
+  font-size: 14px !important;
+  outline: none !important;
+  transition: border-color .2s !important;
+}
+
+.wc-block-components-totals-coupon input:focus,
+.wc-block-components-coupon input[type="text"]:focus {
+  border-color: rgba(255,106,0,.4) !important;
+}
+
+/* Кнопки в підсумку */
+.wc-block-components-totals-coupon__button,
+.wc-block-components-button.wc-block-components-totals-coupon__button {
+  padding: 10px 16px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  background: rgba(255,255,255,.06) !important;
+  color: var(--text) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all .2s !important;
+  white-space: nowrap !important;
+}
+
+.wc-block-components-totals-coupon__button:hover {
+  background: rgba(255,106,0,.15) !important;
+  border-color: rgba(255,106,0,.35) !important;
+  color: var(--orange2) !important;
+}
+
+/* Кнопка "Оформити замовлення" */
+.wc-block-cart__submit-container,
+.wp-block-woocommerce-proceed-to-checkout-block {
+  padding: 16px 18px !important;
+}
+
+.wc-block-cart__submit-button,
+.wc-block-components-checkout-place-order-button,
+.wp-block-woocommerce-proceed-to-checkout-block a,
+.wc-block-cart__submit-container .wc-block-components-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  padding: 14px 20px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,106,0,.5) !important;
+  background: rgba(255,106,0,.22) !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background .2s, transform .15s !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.wc-block-cart__submit-button:hover,
+.wp-block-woocommerce-proceed-to-checkout-block a:hover,
+.wc-block-cart__submit-container .wc-block-components-button:hover {
+  background: rgba(255,106,0,.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Знижка */
+.wc-block-components-totals-discount__coupon-list-item .wc-block-components-chip__text {
+  color: #9ae6b4 !important;
+}
+
+.wc-block-components-totals-discount .wc-block-components-totals-item__value {
+  color: #9ae6b4 !important;
+}
+
+/* Порожній кошик */
+.wp-block-woocommerce-empty-cart-block {
+  text-align: center !important;
+  padding: 60px 20px !important;
+  color: var(--text) !important;
+}
+
+.wp-block-woocommerce-empty-cart-block h2 {
+  color: var(--text) !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+}
+
+/* Спінер / loading */
+.wc-block-cart .wc-block-components-spinner::before,
+.wc-block-cart .wc-block-components-loading-mask__animation {
+  border-color: rgba(255,106,0,.3) rgba(255,106,0,.3) rgba(255,106,0,.3) var(--orange2) !important;
+}
+
+/* Повідомлення (нотіс) */
+.wc-block-cart .wc-block-components-notice-banner,
+.wc-block-components-notice-banner {
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  color: var(--text) !important;
+  margin-bottom: 16px !important;
+}
+
+.wc-block-components-notice-banner.is-success {
+  background: rgba(72,187,120,.08) !important;
+  border-color: rgba(72,187,120,.3) !important;
+  color: #9ae6b4 !important;
+}
+
+.wc-block-components-notice-banner.is-error {
+  background: rgba(229,62,62,.08) !important;
+  border-color: rgba(229,62,62,.3) !important;
+  color: #fc8181 !important;
+}
+
+/* Акцептовані методи оплати */
+.wp-block-woocommerce-cart-accepted-payment-methods-block {
+  padding: 12px 18px !important;
+  border-top: 1px solid var(--border) !important;
+  opacity: .6 !important;
+}
+
+/* Прибрати білий фон WC block обгортки */
+.wc-block-cart .wp-block-woocommerce-filled-cart-block,
+.wp-block-woocommerce-cart .wp-block-woocommerce-filled-cart-block {
+  background: transparent !important;
 }

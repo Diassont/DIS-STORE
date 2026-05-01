@@ -16,7 +16,7 @@
     </a>
   </div>
 
-  <!-- Категорії горизонтально -->
+  <!-- Категорії -->
   <div class="cat-tabs">
     <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>"
        class="cat-tab <?php echo is_shop() && !is_product_category() ? 'active' : ''; ?>">
@@ -27,7 +27,6 @@
         'taxonomy'   => 'product_cat',
         'hide_empty' => true,
         'parent'     => 0,
-        'exclude'    => get_option('default_product_cat'),
       ]);
       $current_id = is_product_category() ? get_queried_object()->term_id : 0;
     ?>
@@ -58,12 +57,58 @@
   <div class="product-grid">
     <?php if (have_posts()): ?>
       <?php while (have_posts()): the_post(); global $product; ?>
-        <article class="p-card">
+        <?php
+          $product_id  = get_the_ID();
 
-          <a href="<?php the_permalink(); ?>" class="p-imgwrap">
-            <?php echo woocommerce_get_product_thumbnail('medium'); ?>
-          </a>
+          // Wishlist
+          $in_wishlist = false;
+          if (function_exists('yith_wcwl_wishlists')) {
+            $in_wishlist = yith_wcwl_wishlists()->is_product_in_wishlist($product_id);
+          }
 
+          // Compare
+          $in_compare = false;
+          if (class_exists('YITH_WooCompare_Products_List')) {
+            $compare_list = YITH_WooCompare_Products_List::instance();
+            $in_compare   = $compare_list->has($product_id);
+          }
+        ?>
+
+        <article class="p-card" data-product-id="<?php echo $product_id; ?>">
+
+          <!-- Фото + hover-кнопки -->
+          <div class="p-imgwrap">
+            <a href="<?php the_permalink(); ?>" class="p-img-link">
+              <?php echo woocommerce_get_product_thumbnail('medium'); ?>
+            </a>
+
+            <!-- Кнопки обране/порівняння — з'являються при hover -->
+            <div class="p-hover-actions">
+              <button
+                class="p-action-btn wishlist-btn <?php echo $in_wishlist ? 'is-active' : ''; ?>"
+                data-product-id="<?php echo $product_id; ?>"
+                aria-label="<?php echo $in_wishlist ? 'Видалити з обраного' : 'Додати в обране'; ?>"
+                title="<?php echo $in_wishlist ? 'В обраному' : 'В обране'; ?>">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </button>
+
+              <button
+                class="p-action-btn compare-btn <?php echo $in_compare ? 'is-active' : ''; ?>"
+                data-product-id="<?php echo $product_id; ?>"
+                aria-label="<?php echo $in_compare ? 'Видалити з порівняння' : 'Порівняти'; ?>"
+                title="<?php echo $in_compare ? 'В порівнянні' : 'Порівняти'; ?>">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Тіло картки -->
           <div class="p-body">
             <h3 class="p-title">
               <a href="<?php the_permalink(); ?>">

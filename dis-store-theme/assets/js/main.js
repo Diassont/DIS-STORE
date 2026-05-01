@@ -363,3 +363,173 @@ lucide.createIcons();
   if (priceMax) priceMax.addEventListener('input', applyFilter);
   if (sort)     sort.addEventListener('change', applyFilter);
 })();
+
+/* =========================================================
+   Wishlist + Compare AJAX
+   ========================================================= */
+(function () {
+
+  const ajaxUrl = (typeof disStoreData !== 'undefined') ? disStoreData.ajaxUrl : '/wp-admin/admin-ajax.php';
+  const nonce   = (typeof disStoreData !== 'undefined') ? disStoreData.nonce  : '';
+
+  /* --- Оновити лічильник в шапці --- */
+  function updateCount(id, count) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (count > 0) {
+      el.textContent = count;
+      el.style.display = '';
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  /* --- Анімація серця --- */
+  function animateHeart(btn) {
+    btn.classList.remove('heart-pop');
+    void btn.offsetWidth;
+    btn.classList.add('heart-pop');
+    btn.addEventListener('animationend', () => btn.classList.remove('heart-pop'), { once: true });
+  }
+
+  /* --- Анімація порівняння (лінійки) --- */
+  function animateCompare(btn) {
+    btn.classList.remove('compare-pop');
+    void btn.offsetWidth;
+    btn.classList.add('compare-pop');
+    btn.addEventListener('animationend', () => btn.classList.remove('compare-pop'), { once: true });
+  }
+
+  /* --- Синхронізувати всі кнопки одного товару на сторінці --- */
+  function syncButtons(selector, productId, isActive, labelActive, labelInactive) {
+    document.querySelectorAll(`${selector}[data-product-id="${productId}"]`).forEach(btn => {
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-label', isActive ? labelActive : labelInactive);
+      btn.setAttribute('title', isActive ? labelActive : labelInactive);
+      const span = btn.querySelector('span');
+      if (span) span.textContent = isActive ? labelActive : labelInactive;
+    });
+  }
+
+  /* =====================================================
+     WISHLIST
+     ===================================================== */
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.wishlist-btn');
+    if (!btn) return;
+    e.preventDefault();
+
+    const productId = btn.dataset.productId;
+    if (!productId) return;
+
+    const isActive = btn.classList.contains('is-active');
+
+    // Оптимістичне оновлення UI
+    syncButtons('.wishlist-btn', productId, !isActive, 'В обраному', 'В обране');
+    animateHeart(btn);
+
+    // AJAX запит
+    const body = new URLSearchParams({
+      action:     'dis_wishlist_toggle',
+      nonce:      nonce,
+      product_id: productId,
+    });
+
+    fetch(ajaxUrl, { method: 'POST', body, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          const nowActive = data.data.active;
+          syncButtons('.wishlist-btn', productId, nowActive, 'В обраному', 'В обране');
+          updateCount('wishlist-count', data.data.count);
+        } else {
+          // Відкат
+          syncButtons('.wishlist-btn', productId, isActive, 'В обраному', 'В обране');
+        }
+      })
+      .catch(() => {
+        // Відкат при помилці
+        syncButtons('.wishlist-btn', productId, isActive, 'В обраному', 'В обране');
+      });
+  });
+
+  /* =====================================================
+     COMPARE — використовуємо нативний WC AJAX плагіну
+     щоб cookie встановлювалось правильно
+     ===================================================== */
+
+  // Читаємо cookie списку порівняння (ім'я передається з PHP)
+  function getCompareCookie() {
+    const cookieName = (typeof disStoreData !== 'undefined' && disStoreData.compareCookieName)
+      ? disStoreData.compareCookieName
+      : 'YITH_WooCompare_Products_List';
+    const match = document.cookie.match(new RegExp('(?:^|; )' + cookieName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+    if (!match) return [];
+    try { return JSON.parse(decodeURIComponent(match[1])); } catch(e) { return []; }
+  }
+
+  // WC AJAX endpoint плагіну
+  function getCompareAjaxUrl(action) {
+    // Якщо plagін вже локалізував свій об'єкт — беремо звідти
+    if (typeof yith_woocompare !== 'undefined' && yith_woocompare.ajaxurl) {
+      return yith_woocompare.ajaxurl.replace('%%endpoint%%', action);
+    }
+    // Fallback — стандартний WC AJAX
+    return '/?wc-ajax=' + action;
+  }
+
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.compare-btn');
+    if (!btn) return;
+    e.preventDefault();
+
+    const productId = btn.dataset.productId;
+    if (!productId) return;
+
+    const isActive = btn.classList.contains('is-active');
+
+    // Оптимістичне оновлення UI одразу
+    syncButtons('.compare-btn', productId, !isActive, 'В порівнянні', 'Порівняти');
+    animateCompare(btn);
+
+    // Вибираємо правильну дію плагіну
+    const action   = isActive ? 'yith-woocompare-remove-product' : 'yith-woocompare-add-product';
+    const endpoint = getCompareAjaxUrl(action);
+
+    // Нонс з локалізованого об'єкту плагіну
+    const pluginNonce = (typeof yith_woocompare !== 'undefined' && yith_woocompare.nonces)
+      ? (isActive ? yith_woocompare.nonces.remove : yith_woocompare.nonces.add)
+      : '';
+
+    const body = new URLSearchParams({ id: productId, nonce: pluginNonce });
+
+    fetch(endpoint, {
+      method: 'POST',
+      body,
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      credentials: 'same-origin',
+    })
+      .then(r => r.json())
+      .then(data => {
+        // Плагін повертає {added: true/false} або {removed: true/false}
+        const success = isActive ? (data.removed !== false) : (data.added !== false);
+
+        if (success) {
+          const nowActive = !isActive;
+          syncButtons('.compare-btn', productId, nowActive, 'В порівнянні', 'Порівняти');
+          // Оновлюємо лічильник з cookie (плагін вже записав cookie)
+          setTimeout(() => {
+            const list = getCompareCookie();
+            updateCount('compare-count', list.length);
+          }, 100);
+        } else {
+          // Відкат
+          syncButtons('.compare-btn', productId, isActive, 'В порівнянні', 'Порівняти');
+        }
+      })
+      .catch(() => {
+        syncButtons('.compare-btn', productId, isActive, 'В порівнянні', 'Порівняти');
+      });
+  });
+
+})();
