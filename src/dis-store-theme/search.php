@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<section class="section hero" style="padding-top:16px;">
+<section class="section" style="padding-top:16px;">
   <div class="container">
 
     <div class="section-head">
@@ -19,8 +19,9 @@
     </div>
 
     <div style="margin-top:14px;">
-      <form class="header-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-        <input class="search-input" type="search" name="s" placeholder="Пошук..." value="<?php echo esc_attr(get_search_query()); ?>">
+      <form class="header-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>" style="display:flex;gap:8px;">
+        <input class="search-input" style="width:100%;max-width:none;flex:1;" type="search" name="s" placeholder="Пошук..." value="<?php echo esc_attr(get_search_query()); ?>">
+        <button type="submit" class="btn btn-outline" style="flex-shrink:0;">Шукати</button>
       </form>
     </div>
 

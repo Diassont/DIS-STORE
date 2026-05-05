@@ -76,11 +76,11 @@ function disstore_create_demo_posts() {
     ],
     [
       'title' => 'ПК чи ноутбук — що краще для програміста',
-      'excerpt' => 'Розбираємо переваги та недоліки стаціонарних комп\'ютерів і ноутбуків для розробки.',
+      'excerpt' => "Розбираємо переваги та недоліки стаціонарних комп'ютерів і ноутбуків для розробки.",
       'content' => "Стаціонарний ПК має кращу продуктивність за ту ж ціну, ніж ноутбук.\n\nВін легше оновлюється та краще підходить для важких IDE, Docker та віртуальних машин.\n\nНоутбук забезпечує мобільність і зручність роботи з будь-якого місця.",
     ],
     [
-      'title' => 'Чому SSD — обов\'язковий компонент сучасного комп\'ютера',
+      'title' => "Чому SSD — обов'язковий компонент сучасного комп'ютера",
       'excerpt' => 'Розповідаємо, чому SSD у рази швидший за звичайний жорсткий диск.',
       'content' => "SSD-диск значно прискорює запуск системи, програм і ігор.\n\nНавіть бюджетний комп'ютер із SSD працює швидше, ніж дорогий ПК з HDD.\n\nРекомендуємо використовувати SSD мінімум на 512 ГБ.",
     ],
@@ -116,13 +116,15 @@ add_action('acf/init', function () {
   }
 });
 
-wp_enqueue_script(
-  'lucide',
-  'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js',
-  [],
-  null,
-  true
-);
+add_action('wp_enqueue_scripts', function () {
+  wp_enqueue_script(
+    'lucide',
+    'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js',
+    [],
+    null,
+    true
+  );
+});
 
 add_action('after_setup_theme', function() {
     add_theme_support('woocommerce');
@@ -156,7 +158,6 @@ function dis_wishlist_toggle_handler() {
 
   try {
     if ($in_wishlist) {
-      // Знаходимо wishlist і видаляємо товар
       $wishlist = YITH_WCWL_Wishlist_Factory::get_wishlist(false);
       $wishlist_id = $wishlist ? $wishlist->get_id() : 0;
       $wishlists->remove_item([
@@ -165,7 +166,6 @@ function dis_wishlist_toggle_handler() {
       ]);
       $now_active = false;
     } else {
-      // Додаємо в обране
       $wishlists->add_item([
         'product_id'  => $product_id,
         'wishlist_id' => 0,
@@ -173,7 +173,6 @@ function dis_wishlist_toggle_handler() {
       $now_active = true;
     }
   } catch (Exception $e) {
-    // Якщо товар вже є або виникла помилка — визначаємо поточний стан
     $now_active = $wishlists->is_product_in_wishlist($product_id);
   }
 
@@ -186,37 +185,123 @@ function dis_wishlist_toggle_handler() {
 }
 
 /* =========================================================
-   Compare toggle — тепер обробляється нативним плагіном
-   через WC AJAX (yith-woocompare-add-product / remove-product)
-   Наш обробник більше не потрібен.
+   Compare — відключаємо хук плагіну що додає кнопку
+   після товару в каталозі (ми самі виводимо її в шаблоні)
    ========================================================= */
-
-/* =========================================================
-   Compare page redirect — перенаправляємо зі сторінки
-   /compare/ на реальний URL таблиці плагіну
-   ========================================================= */
-add_action('template_redirect', function () {
-  $compare_page_id = get_option('yith_woocompare_page_id');
-  if (!$compare_page_id) return;
-
-  // Якщо ми на сторінці порівняння і це не AJAX
-  if (is_page($compare_page_id) && !wp_doing_ajax()) {
-    // Формуємо правильний URL таблиці порівняння
-    $compare_url = add_query_arg(
-      ['action' => 'yith-woocompare-view-table'],
-      site_url()
-    );
-    wp_redirect($compare_url, 302);
-    exit;
+add_action('wp', function () {
+  if (class_exists('YITH_WooCompare_Frontend')) {
+    remove_action('woocommerce_after_shop_loop_item', [YITH_WooCompare_Frontend::instance(), 'output_button'], 20);
   }
-}, 5);
+});
 
 /* =========================================================
-   Виправити посилання на порівняння в шапці — щоб одразу
-   вело на таблицю, а не на сторінку зі шорткодом
+   Compare — посилання в хедері веде на сторінку /compare/.
    ========================================================= */
 if (!function_exists('yith_woocompare_get_compare_url')) {
   function yith_woocompare_get_compare_url() {
-    return add_query_arg(['action' => 'yith-woocompare-view-table'], site_url());
+    $page_id = get_option('yith_woocompare_page_id');
+    if ($page_id) {
+      return get_permalink($page_id);
+    }
+    return home_url('/compare/');
   }
 }
+
+/* =========================================================
+   Compare — примушуємо плагін переходити на сторінку
+   замість відкриття popup/iframe.
+   Передаємо is_page=true та page_url у JS-об'єкт плагіну.
+   ========================================================= */
+add_filter('yith_woocompare_main_script_localize_array', function ($args) {
+  $page_id  = get_option('yith_woocompare_page_id');
+  $page_url = $page_id ? get_permalink($page_id) : home_url('/compare/');
+
+  $args['is_page']  = true;
+  $args['page_url'] = $page_url;
+
+  return $args;
+});
+
+/* =========================================================
+   Compare — відключаємо нижній preview-bar плагіну.
+   ========================================================= */
+add_filter('yith_woocompare_should_show_preview_bar', '__return_false');
+
+/* =========================================================
+   Compare — підключаємо наш шаблон для сторінки порівняння.
+   Використовуємо template_include щоб WordPress гарантовано
+   підхопив page-compare.php незалежно від slug сторінки.
+   ========================================================= */
+add_filter('template_include', function ($template) {
+  // Не чіпаємо AJAX і popup-запити плагіну
+  if (wp_doing_ajax()) return $template;
+  if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'yith-woocompare-view-table') return $template;
+
+  $compare_page_id = get_option('yith_woocompare_page_id');
+  $is_compare_page = ($compare_page_id && is_page($compare_page_id)) || is_page('compare');
+
+  if ($is_compare_page) {
+    $custom = get_stylesheet_directory() . '/page-compare.php';
+    if (file_exists($custom)) {
+      return $custom;
+    }
+  }
+
+  return $template;
+}, 99);
+
+/* =========================================================
+   Метабокс: лейбли товару (_dis_labels)
+   ========================================================= */
+add_action('add_meta_boxes', function () {
+  add_meta_box(
+    'dis_labels_box',
+    'Лейбли товару',
+    'dis_labels_metabox_html',
+    'product',
+    'side',
+    'default'
+  );
+});
+
+function dis_labels_metabox_html($post) {
+  $value = get_post_meta($post->ID, '_dis_labels', true);
+  wp_nonce_field('dis_labels_save', 'dis_labels_nonce');
+  ?>
+  <p style="margin:0 0 6px;font-size:12px;color:#666;">
+    Введи через кому. Приклади: <code>ТОП</code>, <code>Хіт</code>, <code>Новинка</code>, <code>Gaming</code>
+  </p>
+  <input
+    type="text"
+    name="dis_labels"
+    value="<?php echo esc_attr($value); ?>"
+    style="width:100%;padding:6px 8px;border-radius:4px;border:1px solid #ddd;"
+    placeholder="ТОП, Gaming"
+  >
+  <p style="margin:6px 0 0;font-size:11px;color:#999;">
+    ТОП — помаранчевий · Хіт — червоний · Новинка — зелений · решта — сірий
+  </p>
+  <?php
+}
+
+add_action('save_post_product', function ($post_id) {
+  if (!isset($_POST['dis_labels_nonce'])) return;
+  if (!wp_verify_nonce($_POST['dis_labels_nonce'], 'dis_labels_save')) return;
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+  if (!current_user_can('edit_post', $post_id)) return;
+
+  $labels = sanitize_text_field($_POST['dis_labels'] ?? '');
+  update_post_meta($post_id, '_dis_labels', $labels);
+});
+
+/* =========================================================
+   Сортування товарів: нові додаються в кінець (date ASC)
+   ========================================================= */
+add_filter('woocommerce_get_catalog_ordering_args', function ($args) {
+  // Якщо користувач не змінив сортування вручну — ставимо date ASC
+  if (empty($_GET['orderby'])) {
+    $args['orderby'] = 'date';
+    $args['order']   = 'ASC';
+  }
+  return $args;
+});

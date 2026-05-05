@@ -58,7 +58,6 @@ do_action('woocommerce_before_account_navigation');
          ============================ -->
     <div class="account-content">
       <?php
-        do_action('woocommerce_account_navigation');
         do_action('woocommerce_before_account_content');
       ?>
 

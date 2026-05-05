@@ -13,7 +13,7 @@
   <div class="container footer-inner">
     <div class="footer-col">
 
-      <div class="footer-logo">
+      <a class="footer-logo logo" href="<?php echo esc_url(home_url('/')); ?>" style="text-decoration:none;color:var(--text);font-weight:900;display:flex;align-items:center;gap:8px;width:fit-content;">
         <?php if (!empty($footer_logo) && !empty($footer_logo['url'])): ?>
           <img
             src="<?php echo esc_url($footer_logo['url']); ?>"
@@ -21,9 +21,9 @@
             style="height:32px;width:auto;display:block;"
           >
         <?php else: ?>
-          DIS<span>STORE</span>
+          DIS<span style="color:var(--orange);">STORE</span>
         <?php endif; ?>
-      </div>
+      </a>
 
       <p class="muted"><?php echo esc_html($footer_desc); ?></p>
 
