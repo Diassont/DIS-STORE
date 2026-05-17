@@ -8,38 +8,122 @@ add_action('after_setup_theme', function () {
 
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
+  add_theme_support('woocommerce');
 });
 
-/* CSS + JS */
+/* =========================================================
+   CSS + JS
+   Структура стилів:
+     style.css         — WordPress-хедер теми (обов'язковий)
+     assets/css/main.css       — глобальні стилі (всі сторінки)
+     assets/css/front-page.css — тільки головна (front-page.php)
+     assets/css/home.css       — тільки блог (home.php)
+     assets/css/about.css      — сторінка "Про нас"
+     assets/css/blog.css       — сторінка блогу (page-blog.php)
+     assets/css/contacts.css   — сторінка контактів
+     assets/css/delivery.css   — сторінка доставки
+     assets/css/faq.css        — сторінка FAQ
+     assets/css/warranty.css   — сторінка гарантії
+     assets/css/compare.css    — сторінка порівняння
+   ========================================================= */
 add_action('wp_enqueue_scripts', function () {
   $ver = wp_get_theme()->get('Version');
+  $uri = get_template_directory_uri();
 
+  // 1. WordPress-хедер теми (обов'язковий)
   wp_enqueue_style('dis-style', get_stylesheet_uri(), [], $ver);
 
-  wp_enqueue_style(
-    'dis-main',
-    get_template_directory_uri() . '/assets/css/main.css',
-    ['dis-style'],
-    $ver
-  );
+  // 2. Глобальні стилі — завжди на всіх сторінках
+  wp_enqueue_style('dis-main', $uri . '/assets/css/main.css', ['dis-style'], $ver);
 
-  wp_enqueue_script(
-    'dis-main-js',
-    get_template_directory_uri() . '/assets/js/main.js',
-    [],
-    $ver,
-    true
-  );
+  // 3. Сторінко-специфічні стилі — завантажуємо тільки де потрібно
+  $page_css_map = [
+    'is_front_page' => 'front-page',   // Головна (front-page.php)
+    'is_home'       => 'home',          // Блог-архів (home.php)
+  ];
 
-  wp_enqueue_script(
-    'disstore-filter',
-    get_template_directory_uri() . '/assets/js/filter.js',
-    [],
-    $ver,
-    true
-  );
+  foreach ($page_css_map as $condition => $slug) {
+    if (function_exists($condition) && $condition()) {
+      wp_enqueue_style(
+        "dis-page-{$slug}",
+        $uri . "/assets/css/{$slug}.css",
+        ['dis-main'],
+        $ver
+      );
+    }
+  }
 
-  // Передаємо дані для wishlist/compare у JS
+  // Для page-*.php шаблонів — визначаємо по slug/назві сторінки АБО по template
+  // (get_page_template_slug() працює тільки якщо шаблон вибраний через адмінку,
+  //  тому перевіряємо обидва варіанти)
+  if (is_page()) {
+    // Варіант 1: по template slug (якщо вибраний в адмінці)
+    $template = get_page_template_slug();
+
+    // Варіант 2: по page slug (завжди надійно)
+    $page_slug = get_post_field('post_name', get_queried_object_id());
+
+    $by_template = [
+      'page-about.php'    => 'about',
+      'page-blog.php'     => 'blog',
+      'page-contacts.php' => 'contacts',
+      'page-delivery.php' => 'delivery',
+      'page-faq.php'      => 'faq',
+      'page-warranty.php' => 'warranty',
+    ];
+
+    // Slug сторінки → CSS (відповідає WordPress page slugs)
+    $by_page_slug = [
+      'about'    => 'about',
+      'pro-nas'  => 'about',
+      'contacts' => 'contacts',
+      'contact'  => 'contacts',
+      'kontakty' => 'contacts',
+      'delivery' => 'delivery',
+      'dostavka' => 'delivery',
+      'faq'      => 'faq',
+      'warranty' => 'warranty',
+      'garantiya'=> 'warranty',
+      'blog'     => 'blog',
+    ];
+
+    $css_slug = null;
+
+    if (!empty($template) && isset($by_template[$template])) {
+      $css_slug = $by_template[$template];
+    } elseif (!empty($page_slug) && isset($by_page_slug[$page_slug])) {
+      $css_slug = $by_page_slug[$page_slug];
+    }
+
+    if ($css_slug) {
+      wp_enqueue_style(
+        "dis-page-{$css_slug}",
+        $uri . "/assets/css/{$css_slug}.css",
+        ['dis-main'],
+        $ver
+      );
+    }
+  }
+
+  // Сторінка порівняння (page-compare.php через woocommerce/)
+  $compare_page_id = get_option('yith_woocompare_page_id');
+  if (($compare_page_id && is_page($compare_page_id)) || is_page('compare')) {
+    wp_enqueue_style('dis-page-compare', $uri . '/assets/css/compare.css', ['dis-main'], $ver);
+  }
+
+  // 4. JS
+  wp_enqueue_script('dis-main-js', $uri . '/assets/js/main.js', [], $ver, true);
+
+  // filter.js — тільки якщо файл існує (на архіві товарів)
+  $filter_js = get_template_directory() . '/assets/js/filter.js';
+  if (file_exists($filter_js)) {
+    wp_enqueue_script('disstore-filter', $uri . '/assets/js/filter.js', [], $ver, true);
+  }
+
+  // Lucide icons (CDN)
+  wp_enqueue_script('lucide', 'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js', [], null, true);
+
+  // 5. Передаємо дані для wishlist/compare у JS
   $compare_list = [];
   if (class_exists('YITH_WooCompare_Products_List')) {
     $list = YITH_WooCompare_Products_List::instance();
@@ -116,23 +200,9 @@ add_action('acf/init', function () {
   }
 });
 
-add_action('wp_enqueue_scripts', function () {
-  wp_enqueue_script(
-    'lucide',
-    'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js',
-    [],
-    null,
-    true
-  );
-});
-
-add_action('after_setup_theme', function() {
-    add_theme_support('woocommerce');
-});
-
 // Форсуємо збереження сесії WooCommerce
-add_filter('woocommerce_session_handler', function($handler) {
-    return 'WC_Session_Handler';
+add_filter('woocommerce_session_handler', function ($handler) {
+  return 'WC_Session_Handler';
 });
 
 /* =========================================================
@@ -158,7 +228,7 @@ function dis_wishlist_toggle_handler() {
 
   try {
     if ($in_wishlist) {
-      $wishlist = YITH_WCWL_Wishlist_Factory::get_wishlist(false);
+      $wishlist    = YITH_WCWL_Wishlist_Factory::get_wishlist(false);
       $wishlist_id = $wishlist ? $wishlist->get_id() : 0;
       $wishlists->remove_item([
         'product_id'  => $product_id,
@@ -210,7 +280,6 @@ if (!function_exists('yith_woocompare_get_compare_url')) {
 /* =========================================================
    Compare — примушуємо плагін переходити на сторінку
    замість відкриття popup/iframe.
-   Передаємо is_page=true та page_url у JS-об'єкт плагіну.
    ========================================================= */
 add_filter('yith_woocompare_main_script_localize_array', function ($args) {
   $page_id  = get_option('yith_woocompare_page_id');
@@ -229,11 +298,8 @@ add_filter('yith_woocompare_should_show_preview_bar', '__return_false');
 
 /* =========================================================
    Compare — підключаємо наш шаблон для сторінки порівняння.
-   Використовуємо template_include щоб WordPress гарантовано
-   підхопив page-compare.php незалежно від slug сторінки.
    ========================================================= */
 add_filter('template_include', function ($template) {
-  // Не чіпаємо AJAX і popup-запити плагіну
   if (wp_doing_ajax()) return $template;
   if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'yith-woocompare-view-table') return $template;
 
@@ -241,7 +307,7 @@ add_filter('template_include', function ($template) {
   $is_compare_page = ($compare_page_id && is_page($compare_page_id)) || is_page('compare');
 
   if ($is_compare_page) {
-    $custom = get_stylesheet_directory() . '/page-compare.php';
+    $custom = get_stylesheet_directory() . '/woocommerce/page-compare.php';
     if (file_exists($custom)) {
       return $custom;
     }
@@ -298,10 +364,39 @@ add_action('save_post_product', function ($post_id) {
    Сортування товарів: нові додаються в кінець (date ASC)
    ========================================================= */
 add_filter('woocommerce_get_catalog_ordering_args', function ($args) {
-  // Якщо користувач не змінив сортування вручну — ставимо date ASC
   if (empty($_GET['orderby'])) {
     $args['orderby'] = 'date';
     $args['order']   = 'ASC';
   }
   return $args;
+});
+
+/* =========================================================
+   Кнопка "Купити" замість "Додати в кошик" на сторінці товару
+   ========================================================= */
+add_filter('woocommerce_product_single_add_to_cart_text', function () {
+  return 'Купити';
+});
+
+/* =========================================================
+   Wishlist: переносимо дату над кнопку (десктоп)
+   ========================================================= */
+add_action('wp_footer', function () {
+  ?>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.wishlist_table tbody tr').forEach(function (row) {
+      var dateTd  = row.querySelector('td.product-date');
+      var cartTd  = row.querySelector('td.product-add-to-cart');
+      if (!dateTd || !cartTd) return;
+      var dateText = dateTd.textContent.trim();
+      if (!dateText) return;
+      var label = document.createElement('div');
+      label.className = 'wishlist-date-label';
+      label.innerHTML = 'Додано: <span>' + dateText + '</span>';
+      cartTd.insertBefore(label, cartTd.firstChild);
+    });
+  });
+  </script>
+  <?php
 });
